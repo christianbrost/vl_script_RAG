@@ -1,0 +1,12 @@
+services:
+  chroma:
+    image: chromadb/chroma
+  
+  app:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    ports: 
+    - "8000:8000"
+    environment:
+    - OLLAMA_HOST=http://host.docker.internal:11434
