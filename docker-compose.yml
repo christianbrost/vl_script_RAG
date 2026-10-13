@@ -1,12 +1,20 @@
 services:
   chroma:
     image: chromadb/chroma
+    volumes:
+    - chroma_data:/data
   
   app:
     build:
       context: .
       dockerfile: app/Dockerfile
-    ports: 
+    ports:
     - "8000:8000"
     environment:
     - OLLAMA_HOST=http://host.docker.internal:11434
+    volumes:
+    - onnx_model:/root/.cache
+
+volumes:
+  chroma_data:
+  onnx_model:
